@@ -27,7 +27,7 @@
     "react-scripts": "4.0.2",
     "react-tiny-link": "^3.6.0"
   },
-  "proxy": "https://twitt-social-app-backend",
+  "proxy": "https://twitt-app-backend.herokuapp.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
