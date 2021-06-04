@@ -3,6 +3,7 @@ import "./styles/main.scss";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter as Router } from "react-router-dom";
+import { AuthProvider } from "./context/auth-context";
 
 const client = new QueryClient({
   defaultOptions: {
@@ -20,8 +21,10 @@ const client = new QueryClient({
 export default function AppProviders({ children }) {
   return (
     <QueryClientProvider client={client}>
-      <Router>{children}</Router>
-      <ReactQueryDevtools />
+      <AuthProvider>
+        <Router>{children}</Router>
+        <ReactQueryDevtools />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

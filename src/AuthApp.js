@@ -5,8 +5,8 @@ import { Col, Container, Row } from "react-bootstrap";
 import MediaQuery from "react-responsive";
 import Routes from "./Routes";
 
-
 export default function AuthApp() {
+  
   return (
     <Container >
       <Row>
