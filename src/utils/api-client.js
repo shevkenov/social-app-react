@@ -3,17 +3,23 @@ import axios from 'axios';
 const client = axios.create();
 
 export async function authenticate() {
-    return await client.get('/auth/login').than(response => response.data.user);
+    return await client.get('/auth/login').then(response => response.data.user);
 }
 
-export async function login() {}
-
-export async function signup(payload) {
-    await client.post("/auth/signup", payload);
+export async function login(payload) {
+    await client.post("/auth/login", payload).then;
     window.location.pathname = "/";
 }
 
-export async function logout() {}
+export async function signup(payload) {
+    await client.post("/auth/signup", payload);
+    window.location.assign("/settings/profile?redirect=true");
+}
+
+export async function logout() {
+    await client.get("/auth/logout");
+    window.location.pathname = "/";
+}
 
 export async function getNotifications() {}
 
@@ -53,7 +59,9 @@ export async function unrepostPost() {}
 
 export async function repostPost() {}
 
-export async function updateUserDetails() {}
+export async function updateUserDetails(payload) {
+    client.post(`/api/updateuser`, payload);
+}
 
 export async function createPost() {}
 
