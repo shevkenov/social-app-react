@@ -22,19 +22,19 @@ export default function Routes() {
       <Col className="px-sm-4" sm="12" lg="8">
         <Col className="border">
           <Switch>
-            <Route to="/explore" component={Explore} />
-            <Route to="/search" component={SearchResults} />
-            <Route to="/notifications" component={Notifications} />
-            <Route to="/post/:postId/like" component={PostLikes} />
-            <Route to="/post/:postId/reposts" component={PostReposts} />
-            <Route to="/post/:postId" component={PostDetail} />
-            <Route to="/user/:username/friends" component={UserFriends} />
-            <Route to="/user/:username/followers" component={UserFollowers} />
-            <Route to="/user/:username" component={UserDetail} />
-            <Route to="/settings/profile" component={ProfileModal} />
-            <Route to="/" component={Home} />
+            <Route path="/notifications" component={Notifications} />
+            <Route path="/search" component={SearchResults} />
+            <Route path="/post/:postId/like" component={PostLikes} />
+            <Route path="/explore" component={Explore} />
+            <Route path="/post/:postId/reposts" component={PostReposts} />
+            <Route path="/post/:postId" component={PostDetail} />
+            <Route path="/user/:username/friends" component={UserFriends} />
+            <Route path="/user/:username/followers" component={UserFollowers} />
+            <Route path="/user/:username" component={UserDetail} />
+            <Route path="/settings/profile" component={ProfileModal} />
+            <Route path="/" component={Home} />
           </Switch>
-          <Route to="/compose/post" component={CreatePostModal} />
+          <Route path="/compose/post" component={CreatePostModal} />
         </Col>
       </Col>
 
