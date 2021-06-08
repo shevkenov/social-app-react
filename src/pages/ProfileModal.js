@@ -1,11 +1,14 @@
 import React from "react";
 import { Alert, Figure, Form, Modal, Row } from "react-bootstrap";
+import { useHistory } from "react-router";
 import { useAuthUser } from "../context/auth-context";
 import { updateUserDetails } from "../utils/api-client";
+import { uploadMedia } from "../utils/upload";
 import { validate } from "../utils/validate";
 
 export default function ProfileModal() {
   const authUser = useAuthUser();
+  const history = useHistory();
 
   const [isLoading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
@@ -15,6 +18,7 @@ export default function ProfileModal() {
   const [location, setLocation] = React.useState(authUser?.location);
   const [website, setWebsite] = React.useState(authUser.entities.url.urls[0]?.url);
   const [profile, setProfile] = React.useState(authUser.profile_image_url_https);
+  const redirected = new URLSearchParams(history.location.search).get("redirect");
 
   const handleSubmit = async(e) => {
     e.preventDefault();
@@ -28,7 +32,6 @@ export default function ProfileModal() {
       const _location = validate(location, "html", {max_length: 280, identifier: "Location"});
       const _website = validate(website, "html", {max_length: 280, identifier: "Website"});
 
-
       const user = {
         name: _name,
         description: _bio,
@@ -39,6 +42,7 @@ export default function ProfileModal() {
       }
 
       await updateUserDetails(user);
+      handleCloseModal();
     } catch (error) {
       setLoading(false);
       setError(error.message);
@@ -46,6 +50,38 @@ export default function ProfileModal() {
       setLoading(false)
     }
   }
+
+  const handleUpladBanner = async(e) => {
+    const file = e.target.files[0];
+    const preset = "rgsx3lof";
+    const type = "image";
+
+    if(file){
+      const banner_url = await uploadMedia({file, preset, type});
+      setBanner(banner_url);
+    }
+  }
+
+  const handleUploadProfile = async(e) => {
+    const file = e.target.files[0];
+    const preset = "xxe4qgrv";
+    const type = "image";
+
+    if(file){
+      const avatar = await uploadMedia({file, preset, type});
+      setProfile(avatar);
+    }
+  }
+
+  const handleCloseModal = () => {
+    
+    if(redirected === "true"){
+      history.push("/home");
+    }else{
+      history.goBack()
+    }
+  }
+
 
   return (
     <Modal
@@ -60,7 +96,7 @@ export default function ProfileModal() {
       <Modal.Header closeButton className="py-2">
         <Modal.Title>
           <small className="font-weight-bold">
-            {!"redirected" ? "Edit profile" : "Complete your profile"}
+            {!redirected ? "Edit profile" : "Complete your profile"}
           </small>
         </Modal.Title>
       </Modal.Header>
@@ -90,6 +126,7 @@ export default function ProfileModal() {
                 id="cover-image"
                 type="file"
                 accept="img/*"
+                onChange={handleUpladBanner}
               />
             </Figure>
             <div className="px-3">
@@ -106,6 +143,7 @@ export default function ProfileModal() {
                     id="profile-image"
                     type="file"
                     accept="img/*"
+                    onChange={handleUploadProfile}
                   />
                 </label>
               </Row>
