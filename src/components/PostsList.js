@@ -1,7 +1,8 @@
 import React from "react";
 import { ListGroup } from "react-bootstrap";
 
-export default function PostsList() {
+export default function PostsList({posts}) {
+
   return (
     <ListGroup variant="flush" className="border-bottom">
       <div className="message">No posts for you right now</div>
