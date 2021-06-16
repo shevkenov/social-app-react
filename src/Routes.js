@@ -24,7 +24,7 @@ export default function Routes() {
           <Switch>
             <Route path="/notifications" component={Notifications} />
             <Route path="/search" component={SearchResults} />
-            <Route path="/post/:postId/like" component={PostLikes} />
+            <Route path="/post/:postId/likes" component={PostLikes} />
             <Route path="/explore" component={Explore} />
             <Route path="/post/:postId/reposts" component={PostReposts} />
             <Route path="/post/:postId" component={PostDetail} />
