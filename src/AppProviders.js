@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthProvider } from "./context/auth-context";
 
-const client = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       refetchOnWindowFocus: false,
@@ -20,7 +20,7 @@ const client = new QueryClient({
 
 export default function AppProviders({ children }) {
   return (
-    <QueryClientProvider client={client}>
+    <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Router>{children}</Router>
         <ReactQueryDevtools />
