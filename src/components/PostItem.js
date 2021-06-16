@@ -36,7 +36,7 @@ export default function PostItem({ post, no_reply_tag }) {
             </UserLink>
             <span className="text-muted mr-1">@{post.user.screen_name}</span>
             <pre className="m-0 text-muted">{" - "}</pre>
-            <span className="text-muted">{() => formatCreatedAt(post.created_at)}</span>
+            <span className="text-muted">{formatCreatedAt(post.created_at)}</span>
           </Row>
           <Row className="mb-n1 mt-1">
             <blockquote className="mb-1 mw-100">
